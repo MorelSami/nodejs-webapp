@@ -1,0 +1,14 @@
+{
+  "name": "nodejs-webapp",
+  "version": "1.0.0",
+  "description": "My first nodejs application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Morel Sami",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
