@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nodesy-container
-        image: morelacr.azurecr.io/nodejs/app:1.0.0
+        image: samiacr.azurecr.io/nodejs-webapp:v1.0.0
         ports:
         - containerPort: 3000
 
