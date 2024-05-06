@@ -1,12 +1,14 @@
-##NodeJS  Web Application
+#NodeJS  Web Application
 
-A simple standealone web application show casing a web deployment using NodeJs
+<h5>A simple standalone web application show casing a web deployment using NodeJs </h5>
 
-Tech:
-- NodeJS server
-- Npm package manager
-- Html5 & JS
-- Docker
-- Container Ochestrator (Microsoft Azure Kubernetes Service AKS)
-- Container Image Registry (Azure Container Registry - ACR)
-- VCS (GitHub)
+<pre>
+    Tech:
+    - NodeJS server
+    - Npm package manager
+    - Html5 & JS
+    - Docker
+    - Container Ochestrators (AKS & ECS)
+    - Container Image Registry (ACR & DockerHub)
+    - VCS (GitHub)
+</pre>
