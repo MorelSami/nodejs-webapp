@@ -38,7 +38,7 @@ resource "aws_lb" "ecs_alb" {
   name               = "nodejs-app-alb"
   internal           = false
   load_balancer_type = "application"
-  subnets          = ["subnet-08c54a97347812875"]
+  subnets          = ["subnet-08c54a97347812875", "subnet-07647e22aee04b214"]  #At least two subnets is required for an alb resource
   security_groups  = ["sg-0b702e58ad3103075"]
 
   enable_deletion_protection = false
