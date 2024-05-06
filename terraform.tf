@@ -23,7 +23,7 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
     "image": "smorel237/nodejs-webapp:v1.0.0",  
     "portMappings": [
       {
-        "containerPort": 80,
+        "containerPort": 3000,
         "hostPort": 3000
       }
     ]
