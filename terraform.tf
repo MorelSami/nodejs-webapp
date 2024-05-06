@@ -38,6 +38,7 @@ resource "aws_lb_target_group" "ecs_target_group" {
   name     = "nodejs-lb-tg"
   port     = 80
   protocol = "HTTP"
+  target_type = "ip"
   vpc_id   = "vpc-091393213ec10604f"
 }
 
