@@ -33,13 +33,36 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
   )
 }
 
-#create alb target group for task definition service
+#create loadbalancer for cluster service
+resource "aws_lb" "ecs_alb" {
+  name               = "nodejs-app-alb"
+  internal           = false
+  load_balancer_type = "application"
+  subnets          = ["subnet-08c54a97347812875"]
+  security_groups  = ["sg-0b702e58ad3103075"]
+
+  enable_deletion_protection = false
+
+}
+
+#create alb target group for ecs service alb
 resource "aws_lb_target_group" "ecs_target_group" {
   name     = "nodejs-lb-tg"
   port     = 80
   protocol = "HTTP"
   target_type = "ip"
   vpc_id   = "vpc-091393213ec10604f"
+}
+
+resource "aws_lb_listener" "ecs_alb_listener" {
+  load_balancer_arn = aws_lb.ecs_alb.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.ecs_target_group.arn
+  }
 }
 
 # Create a service to run the task on the cluster
