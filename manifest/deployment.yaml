@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nodesy-container
-        image: smorel237/nodejs-webapp:v1.0.1 #samiacr.azurecr.io/nodejs-webapp:v1.0.0
+        image: 720826398753.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:v1.0.0 #samiacr.azurecr.io/nodejs-webapp:v1.0.0
         ports:
         - containerPort: 3000
 
