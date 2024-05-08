@@ -3,35 +3,34 @@ version: 0.2
 phases:
   install:
     commands:
-    - echo Installing app dependencies...
-    - curl -LO https://dl.k8s.io/release/v1.27.2/bin/linux/amd64/kubectl
-    - chmod +x ./kubectl
-    - mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
-    - echo export PATH=$PATH:$HOME/bin >> ~/.bashrc
-    - source ~/.bashrc
-    - echo Check kubectl version
-    - kubectl version --short --client
-    - echo Installing Json Processor util
-    - sudo yum install jq -y
-    - REGISTRY_URL=https://index.docker.io/v1/
-    - DOCKER_USER=smorel237
-    - DOCKER_PASSWORD=$(jq -sr '.[0].auths."https://index.docker.io/v1/".auth' $HOME/.docker/config.json)
+      - echo Installing app dependencies...
+      - curl -LO https://dl.k8s.io/release/v1.27.2/bin/linux/amd64/kubectl
+      - chmod +x ./kubectl
+      - mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+      - echo export PATH=$PATH:$HOME/bin >> ~/.bashrc
+      - source ~/.bashrc
+      - echo Check kubectl version
+      - kubectl version --short --client
+      - echo Installing Json Processor util
+      - sudo yum install jq -y
+      - REGISTRY_URL=https://index.docker.io/v1/
+      - DOCKER_USER=smorel237
   pre_build:
     commands:
-    - echo Logging in to DockerHub...
-    - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin $REGISTRY_URL
-    - IMAGE_REPO_NAME=smorel237/nodejs-webapp
-    - IMAGE_TAG=v1.0.0
-    - aws eks --region us-east-1 update-kubeconfig --name cicd-cluster
+      - echo Logging in to DockerHub...
+      - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin $REGISTRY_URL
+      - IMAGE_REPO_NAME=smorel237/nodejs-webapp
+      - IMAGE_TAG=v1.0.0
+      - aws eks --region us-east-1 update-kubeconfig --name cicd-cluster
   build:
     commands:
-    - echo Build started on `date`
-    - echo Building the Docker image...
-    - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
   post_build:
     commands:
-    - echo Build completed on `date`
-    - echo Pushing the Docker image...'
-    - docker push $IMAGE_REPO_NAME:$IMAGE_TAG
-    - echo Push the latest image to cluster
-    - kubectl apply -f manifest/deployment.yml
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...'
+      - docker push $IMAGE_REPO_NAME:$IMAGE_TAG
+      - echo Push the latest image to cluster
+      - kubectl apply -f manifest/deployment.yml
