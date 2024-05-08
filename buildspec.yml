@@ -11,14 +11,10 @@ phases:
       - source ~/.bashrc
       - echo Check kubectl version
       - kubectl version --short --client
-      - echo Installing Json Processor util
-      - sudo yum install jq -y
-      - REGISTRY_URL=https://index.docker.io/v1/
-      - DOCKER_USER=smorel237
   pre_build:
     commands:
       - echo Logging in to DockerHub...
-      - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin $REGISTRY_URL
+      - echo "${DOCKER_PASSWORD}" | docker login --username smorel237 --password-stdin
       - IMAGE_REPO_NAME=smorel237/nodejs-webapp
       - IMAGE_TAG=v1.0.0
       - aws eks --region us-east-1 update-kubeconfig --name cicd-cluster
