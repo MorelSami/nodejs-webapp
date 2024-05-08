@@ -13,8 +13,8 @@ phases:
       - kubectl version --short --client
   pre_build:
     commands:
-      - echo Logging in to DockerHub...
-      - echo "${DOCKER_PASSWORD}" | docker login --username smorel237 --password-stdin
+      - echo Logging in to AWS ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 720826398753.dkr.ecr.us-east-1.amazonaws.com
       - IMAGE_REPO_NAME=smorel237/nodejs-webapp
       - IMAGE_TAG=v1.0.0
       - aws eks --region us-east-1 update-kubeconfig --name cicd-cluster
